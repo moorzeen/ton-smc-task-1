@@ -43,6 +43,13 @@ describe('AcceptFundsContract', () => {
         let contractBalanceBefore = contract.balance
         let userBalanceBefore = await user.getBalance();
 
+        await blockchain.setVerbosityForAddress(contract.address, {
+            blockchainLogs: false,
+            vmLogs: "vm_logs_full",
+            debugLogs: false,
+            print: true
+        })
+
         const sendAcceptFundsResult = await acceptFundsContract.sendAcceptFunds(user.getSender(), toNano('1.9'));
         expect(sendAcceptFundsResult.transactions).toHaveTransaction({
             from: user.address,
