@@ -51,8 +51,8 @@ const op::admin_withdraw = 0x217E5898;
     if (op == op::admin_withdraw) {
         throw_unless(101, equal_slices(sender, admin_address));
         throw_unless(102, my_balance >= min_store);
-        throw_unless(103, my_balance - min_store >= min_store);
-        send_empty_message(my_balance - min_store, admin_address, 0);
+        raw_reserve(min_store, 0);
+        send_empty_message(0, admin_address, 128);
         return();
     }
 
